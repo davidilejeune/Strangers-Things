@@ -5,6 +5,7 @@ import EveryPost from './components/PostsPage'
 import ProfilePage from './components/ProfilePage'
 import UserLogin from './components/UserLogin'
 import CreateNewUser from './components/CreateNewUser'
+import CreateNewPosts from './components/CreateNewPosts'
 import './App.css'
 
 
@@ -14,6 +15,7 @@ function App() {
     const baseUrl = `https://strangers-things.herokuapp.com/api/${cohort}`;
 
     const [ token, setToken ] = useState('');
+    console.log(token)
 
   return (
     <>
@@ -29,9 +31,9 @@ function App() {
     <div className='bodySpace'>
     <Routes>
         <Route path='/' element={<HomePage/>} />
-        <Route path='/posts' element={<EveryPost/>} token={token}/>
-        <Route path='/makepost' element={<createNewPosts token={token}/>} />
-        <Route path='/profile' element={<ProfilePage/>} token={token}/>
+        <Route path='/posts' element={<EveryPost token={token}/>} />
+        <Route path='/makepost' element={<CreateNewPosts token={token}/>} />
+        <Route path='/profile' element={<ProfilePage token={token}/>} />
         <Route path='/user' element={<UserLogin token={token}/>} />
         <Route path='/newUser' element={<CreateNewUser setToken={setToken}/>} />
     </Routes>

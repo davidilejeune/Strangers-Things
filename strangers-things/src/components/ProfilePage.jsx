@@ -1,11 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-export default function ProfilePage({ token }) {
+export default function ProfilePage(props) {
+
+    const cohort = '2306-FTB-ET-WEB-FT'; 
+    const baseUrl = `https://strangers-things.herokuapp.com/api/${cohort}`;
 
     const [ message, setMessage ] = useState('')
-    const [ user, setUser ] = useState({})
-    
+    const [ userName, setUserName ] = useState({})
+    console.log(props)
+    const token = props.token
+
     useEffect(() => {
         
         async function fetchUser() {
@@ -20,8 +25,8 @@ export default function ProfilePage({ token }) {
             let result = await response.json()
 
             console.log(result)
-            setMessage(result.message)
-            setUser(result.user)
+            setMessage(result.data.message)
+            setUserName(result.data.username)
             
         }
 
@@ -38,7 +43,7 @@ export default function ProfilePage({ token }) {
         <div className="profile">
         <h1>{message}</h1>
         <h3>Hello:</h3>
-            <h4>{user.username}</h4>
+            <h4>{userName.username}</h4>
         </div>
     )
 }

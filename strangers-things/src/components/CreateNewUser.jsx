@@ -6,9 +6,8 @@ export default function CreateNewUser({ setToken }){
 const cohort = '2306-FTB-ET-WEB-FT' 
 const baseUrl = `https://strangers-things.herokuapp.com/api/${cohort}`
 
-const [userName, setUserName] = useState('');
+const [username, setUserName] = useState('');
 const [password, setPassword] = useState('');
-// const [email,setEmail] = useState('');
 const [errorMsg, setErrorMsg] = useState('');
 const navigate = useNavigate()
 
@@ -23,7 +22,7 @@ async function handleSubmit(e){
         return
     }
 
-    const response = await fetch(`${baseUrl}/users/register}`,
+    const response = await fetch(`${baseUrl}/users/register`,
     {
         method: 'POST',
         headers: { 
@@ -31,20 +30,19 @@ async function handleSubmit(e){
         },
         body: JSON.stringify({
             user: {
-            userName, password
+                username: username,
+                password: password
             }
         })
     })
 
 console.log('Sent successfully!')
-const data = await response.json()
+const result = await response.json()
 
-console.log('Result:', data)
+console.log('Result:', result.data.token)
 
-setToken(data.token)
+setToken(result.data.token)
 navigate('/profile')
-// setUserName('')
-// setPassword('')
 
 } catch(error){
     console.error(error)
@@ -59,7 +57,7 @@ return (
           <h3>Registration Form</h3>
           <form className="registerForm" onSubmit={handleSubmit}>
             <label>User Name
-            <input value={userName} onChange={(e) => setUserName(e.target.value)} type="username" placeholder="user name" />
+            <input value={username} onChange={(e) => setUserName(e.target.value)} type="username" placeholder="user name" />
             </label>
             <label>Password
             <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" />
