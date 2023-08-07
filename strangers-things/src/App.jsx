@@ -6,13 +6,11 @@ import ProfilePage from './components/ProfilePage'
 import UserLogin from './components/UserLogin'
 import CreateNewUser from './components/CreateNewUser'
 import CreateNewPosts from './components/CreateNewPosts'
+import MessageUser from './components/MessageUser'
 import './App.css'
 
 
 function App() {
-    
-    const cohort = '2306-FTB-ET-WEB-FT'; 
-    const baseUrl = `https://strangers-things.herokuapp.com/api/${cohort}`;
 
     const [ token, setToken ] = useState('');
     console.log(token)
@@ -35,6 +33,7 @@ function App() {
         <Route path='/makepost' element={<CreateNewPosts token={token}/>} />
         <Route path='/profile' element={<ProfilePage token={token}/>} />
         <Route path='/user' element={<UserLogin token={token}/>} />
+        <Route path='/message' element={<MessageUser token={token}/>} />
         <Route path='/newUser' element={<CreateNewUser setToken={setToken}/>} />
     </Routes>
     </div>

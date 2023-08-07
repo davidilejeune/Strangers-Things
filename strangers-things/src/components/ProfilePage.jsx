@@ -1,15 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-export default function ProfilePage(props) {
+export default function ProfilePage({token}) {
 
     const cohort = '2306-FTB-ET-WEB-FT'; 
     const baseUrl = `https://strangers-things.herokuapp.com/api/${cohort}`;
 
     const [ message, setMessage ] = useState('')
-    const [ userName, setUserName ] = useState({})
-    console.log(props)
-    const token = props.token
+    const [ username, setUserName ] = useState({})
 
     useEffect(() => {
         
@@ -25,8 +23,8 @@ export default function ProfilePage(props) {
             let result = await response.json()
 
             console.log(result)
-            setMessage(result.data.message)
-            setUserName(result.data.username)
+            setMessage(result.message)
+            setUserName(result.username)
             
         }
 
@@ -43,7 +41,7 @@ export default function ProfilePage(props) {
         <div className="profile">
         <h1>{message}</h1>
         <h3>Hello:</h3>
-            <h4>{userName.username}</h4>
+            <h4>{username.username}</h4>
         </div>
     )
 }

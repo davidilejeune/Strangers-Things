@@ -9,12 +9,12 @@ export default function CreateNewPosts({token}) {
     const [ description, setDescription] = useState('')
     const [ price, setPrice] = useState('')
     const [ location, setLocation] = useState('')
-    const [ willDeliver, setwillDeliver] = useState('')
+    const [ willDeliver, setwillDeliver] = useState(false)
     const navigate = useNavigate()
 
     async function handleSubmit(e){
         e.preventDefault()
-        console.log('The post has been added')
+        
         try {
     
         if (errorMsg){
@@ -50,6 +50,7 @@ export default function CreateNewPosts({token}) {
 
     }  catch (err){
         console.error('Post was not submitted')
+        alert('You must be logged in to submit a post')
     }
     }
 
@@ -67,13 +68,13 @@ export default function CreateNewPosts({token}) {
             <input value={description} onChange={(e) => setDescription(e.target.value)} type="description" placeholder="Item Description" />
             </label>
             <label>Price
-            <input value={price} onChange={(e) => setPrice(e.target.value)} type="price" placeholder="Price" />
+            <input value={price} onChange={(e) => setPrice(e.target.value)} type="number" placeholder="Price" />
             </label>
             <label>Location
             <input value={location} onChange={(e) => setLocation(e.target.value)} type="location" placeholder="Location" />
             </label>
             <label>Will Deliver?
-            <input value={willDeliver} onChange={(e) => setwillDeliver(e.target.value)} type="delivery" placeholder="Will you?" />
+            <input value={willDeliver} onChange={(e) => setwillDeliver(e.target.value)} type="checkbox" />
             </label>
             <button type="submit" value="Submit">Submit Post</button>
           </form>
